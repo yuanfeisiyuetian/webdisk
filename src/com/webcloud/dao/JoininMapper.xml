@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webcloud.dao.JoininMapper" >
+  <resultMap id="BaseResultMap" type="com.webcloud.entity.Joinin" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <id column="gid" property="gid" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="odiauth" property="odiauth" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, gid, date, odiauth
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.webcloud.entity.JoininKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from joinin
+    where uid = #{uid,jdbcType=INTEGER}
+      and gid = #{gid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据用户名选择 -->
+   <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from joinin
+    where uid = #{uid}
+  </select>
+  
+  <!-- 根据群id选择 -->
+   <select id="selectByGid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from joinin
+    where gid = #{gid}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.webcloud.entity.JoininKey" >
+    delete from joinin
+    where uid = #{uid,jdbcType=INTEGER}
+      and gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.webcloud.entity.Joinin" >
+    insert into joinin (uid, gid, date, 
+      odiauth)
+    values (#{uid,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
+      #{odiauth,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webcloud.entity.Joinin" >
+    insert into joinin
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="odiauth != null" >
+        odiauth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="odiauth != null" >
+        #{odiauth,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webcloud.entity.Joinin" >
+    update joinin
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="odiauth != null" >
+        odiauth = #{odiauth,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+      and gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webcloud.entity.Joinin" >
+    update joinin
+    set date = #{date,jdbcType=TIMESTAMP},
+      odiauth = #{odiauth,jdbcType=DECIMAL}
+    where uid = #{uid,jdbcType=INTEGER}
+      and gid = #{gid,jdbcType=INTEGER}
+  </update>
+</mapper>

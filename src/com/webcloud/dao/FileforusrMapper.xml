@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webcloud.dao.FileforusrMapper" >
+  <resultMap id="BaseResultMap" type="com.webcloud.entity.Fileforusr" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <id column="ufileid" property="ufileid" jdbcType="INTEGER" />
+    <result column="ufilename" property="ufilename" jdbcType="VARCHAR" />
+    <result column="ufilename_save" property="ufilenameSave" jdbcType="VARCHAR" />
+    <result column="upath" property="upath" jdbcType="VARCHAR" />
+    <result column="upath_save" property="upathSave" jdbcType="VARCHAR" />
+    <result column="usize" property="usize" jdbcType="DECIMAL" />
+    <result column="ufileformat" property="ufileformat" jdbcType="VARCHAR" />
+    <result column="uploadtime" property="uploadtime" jdbcType="TIMESTAMP" />
+    <result column="ulastmodtime" property="ulastmodtime" jdbcType="TIMESTAMP" />
+    <result column="uaccesstime" property="uaccesstime" jdbcType="TIMESTAMP" />
+    <result column="udownloadtimes" property="udownloadtimes" jdbcType="DECIMAL" />
+    <result column="isrecycle" property="isrecycle" jdbcType="BIT" />
+    <result column="isshare" property="isshare" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, ufileid, ufilename, ufilename_save, upath, upath_save, usize, ufileformat, uploadtime, 
+    ulastmodtime, uaccesstime, udownloadtimes, isrecycle, isshare
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.webcloud.entity.FileforusrKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forusr
+    where uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据用户id，查看文件列表 -->
+   <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forusr
+    where uid = #{uid} and isrecycle = 0
+  </select>
+  
+   <!-- 根据用户id，查看回收站 -->
+   <select id="selectByUidr" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forusr
+    where uid = #{uid} and isrecycle = 1
+  </select>
+  
+   <!-- 根据文件id，查看文件列表 -->
+   <select id="selectByUfileID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forusr
+    where ufileid = #{ufileid}
+  </select>
+  
+  <!-- 根据名称查找文件 -->
+  <select id="selectByFileName" resultMap="BaseResultMap" parameterType="com.webcloud.entity.Fileforusr" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forusr
+    where ufilename like '%${ufilename}%' and uid = #{uid}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.webcloud.entity.FileforusrKey" >
+    delete from file_forusr
+    where uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.webcloud.entity.Fileforusr" >
+    insert into file_forusr (uid, ufileid, ufilename, 
+      ufilename_save, upath, upath_save, 
+      usize, ufileformat, uploadtime, 
+      ulastmodtime, uaccesstime, udownloadtimes, 
+      isrecycle, isshare)
+    values (#{uid,jdbcType=INTEGER}, #{ufileid,jdbcType=INTEGER}, #{ufilename,jdbcType=VARCHAR}, 
+      #{ufilenameSave,jdbcType=VARCHAR}, #{upath,jdbcType=VARCHAR}, #{upathSave,jdbcType=VARCHAR}, 
+      #{usize,jdbcType=DECIMAL}, #{ufileformat,jdbcType=VARCHAR}, #{uploadtime,jdbcType=TIMESTAMP}, 
+      #{ulastmodtime,jdbcType=TIMESTAMP}, #{uaccesstime,jdbcType=TIMESTAMP}, #{udownloadtimes,jdbcType=DECIMAL}, 
+      #{isrecycle,jdbcType=BIT}, #{isshare,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webcloud.entity.Fileforusr" >
+    insert into file_forusr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="ufileid != null" >
+        ufileid,
+      </if>
+      <if test="ufilename != null" >
+        ufilename,
+      </if>
+      <if test="ufilenameSave != null" >
+        ufilename_save,
+      </if>
+      <if test="upath != null" >
+        upath,
+      </if>
+      <if test="upathSave != null" >
+        upath_save,
+      </if>
+      <if test="usize != null" >
+        usize,
+      </if>
+      <if test="ufileformat != null" >
+        ufileformat,
+      </if>
+      <if test="uploadtime != null" >
+        uploadtime,
+      </if>
+      <if test="ulastmodtime != null" >
+        ulastmodtime,
+      </if>
+      <if test="uaccesstime != null" >
+        uaccesstime,
+      </if>
+      <if test="udownloadtimes != null" >
+        udownloadtimes,
+      </if>
+      <if test="isrecycle != null" >
+        isrecycle,
+      </if>
+      <if test="isshare != null" >
+        isshare,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="ufileid != null" >
+        #{ufileid,jdbcType=INTEGER},
+      </if>
+      <if test="ufilename != null" >
+        #{ufilename,jdbcType=VARCHAR},
+      </if>
+      <if test="ufilenameSave != null" >
+        #{ufilenameSave,jdbcType=VARCHAR},
+      </if>
+      <if test="upath != null" >
+        #{upath,jdbcType=VARCHAR},
+      </if>
+      <if test="upathSave != null" >
+        #{upathSave,jdbcType=VARCHAR},
+      </if>
+      <if test="usize != null" >
+        #{usize,jdbcType=DECIMAL},
+      </if>
+      <if test="ufileformat != null" >
+        #{ufileformat,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ulastmodtime != null" >
+        #{ulastmodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uaccesstime != null" >
+        #{uaccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udownloadtimes != null" >
+        #{udownloadtimes,jdbcType=DECIMAL},
+      </if>
+      <if test="isrecycle != null" >
+        #{isrecycle,jdbcType=BIT},
+      </if>
+      <if test="isshare != null" >
+        #{isshare,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webcloud.entity.Fileforusr" >
+    update file_forusr
+    <set >
+      <if test="ufilename != null" >
+        ufilename = #{ufilename,jdbcType=VARCHAR},
+      </if>
+      <if test="ufilenameSave != null" >
+        ufilename_save = #{ufilenameSave,jdbcType=VARCHAR},
+      </if>
+      <if test="upath != null" >
+        upath = #{upath,jdbcType=VARCHAR},
+      </if>
+      <if test="upathSave != null" >
+        upath_save = #{upathSave,jdbcType=VARCHAR},
+      </if>
+      <if test="usize != null" >
+        usize = #{usize,jdbcType=DECIMAL},
+      </if>
+      <if test="ufileformat != null" >
+        ufileformat = #{ufileformat,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadtime != null" >
+        uploadtime = #{uploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ulastmodtime != null" >
+        ulastmodtime = #{ulastmodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uaccesstime != null" >
+        uaccesstime = #{uaccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udownloadtimes != null" >
+        udownloadtimes = #{udownloadtimes,jdbcType=DECIMAL},
+      </if>
+      <if test="isrecycle != null" >
+        isrecycle = #{isrecycle,jdbcType=BIT},
+      </if>
+      <if test="isshare != null" >
+        isshare = #{isshare,jdbcType=BIT},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webcloud.entity.Fileforusr" >
+    update file_forusr
+    set ufilename = #{ufilename,jdbcType=VARCHAR},
+      ufilename_save = #{ufilenameSave,jdbcType=VARCHAR},
+      upath = #{upath,jdbcType=VARCHAR},
+      upath_save = #{upathSave,jdbcType=VARCHAR},
+      usize = #{usize,jdbcType=DECIMAL},
+      ufileformat = #{ufileformat,jdbcType=VARCHAR},
+      uploadtime = #{uploadtime,jdbcType=TIMESTAMP},
+      ulastmodtime = #{ulastmodtime,jdbcType=TIMESTAMP},
+      uaccesstime = #{uaccesstime,jdbcType=TIMESTAMP},
+      udownloadtimes = #{udownloadtimes,jdbcType=DECIMAL},
+      isrecycle = #{isrecycle,jdbcType=BIT},
+      isshare = #{isshare,jdbcType=BIT}
+    where uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </update>
+</mapper>

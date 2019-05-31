@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webcloud.dao.FileforgruMapper" >
+  <resultMap id="BaseResultMap" type="com.webcloud.entity.Fileforgru" >
+    <id column="gid" property="gid" jdbcType="INTEGER" />
+    <id column="gfileid" property="gfileid" jdbcType="INTEGER" />
+    <result column="gfilename" property="gfilename" jdbcType="VARCHAR" />
+    <result column="gfilename_save" property="gfilenameSave" jdbcType="VARCHAR" />
+    <result column="guploadtime" property="guploadtime" jdbcType="TIMESTAMP" />
+    <result column="guploadusrid" property="guploadusrid" jdbcType="INTEGER" />
+    <result column="gfilsize" property="gfilsize" jdbcType="DECIMAL" />
+    <result column="ufilformat" property="ufilformat" jdbcType="VARCHAR" />
+    <result column="gfilepath" property="gfilepath" jdbcType="VARCHAR" />
+    <result column="gpath_save" property="gpathSave" jdbcType="VARCHAR" />
+    <result column="glaccessusrid" property="glaccessusrid" jdbcType="INTEGER" />
+    <result column="glaccesstime" property="glaccesstime" jdbcType="TIMESTAMP" />
+    <result column="glmodusrid" property="glmodusrid" jdbcType="INTEGER" />
+    <result column="glmodtime" property="glmodtime" jdbcType="TIMESTAMP" />
+    <result column="gdownloadtimes" property="gdownloadtimes" jdbcType="DECIMAL" />
+    <result column="isrecycle" property="isrecycle" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gid, gfileid, gfilename, gfilename_save, guploadtime, guploadusrid, gfilsize, ufilformat, 
+    gfilepath, gpath_save, glaccessusrid, glaccesstime, glmodusrid, glmodtime, gdownloadtimes, 
+    isrecycle
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.webcloud.entity.FileforgruKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forgru
+    where gid = #{gid,jdbcType=INTEGER}
+      and gfileid = #{gfileid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByGid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forgru
+    where gid = #{gid,jdbcType=INTEGER} and isrecycle = 0
+  </select>
+  
+  <select id="selectByGFileid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forgru
+    where gfileid = #{gfileid}
+  </select>
+  
+  <!-- 根据名称查找文件 -->
+  <select id="selectByGFileName" resultMap="BaseResultMap" parameterType="com.webcloud.entity.Fileforusr" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forgru
+    where gfilename like '%${gfilename}%' and gid = #{gid}
+  </select>
+  
+   <select id="selectByGidr" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_forgru
+    where gid = #{gid} and isrecycle = 1
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.webcloud.entity.FileforgruKey" >
+    delete from file_forgru
+    where gid = #{gid,jdbcType=INTEGER}
+      and gfileid = #{gfileid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.webcloud.entity.Fileforgru" >
+    insert into file_forgru (gid, gfileid, gfilename, 
+      gfilename_save, guploadtime, guploadusrid, 
+      gfilsize, ufilformat, gfilepath, 
+      gpath_save, glaccessusrid, glaccesstime, 
+      glmodusrid, glmodtime, gdownloadtimes, 
+      isrecycle)
+    values (#{gid,jdbcType=INTEGER}, #{gfileid,jdbcType=INTEGER}, #{gfilename,jdbcType=VARCHAR}, 
+      #{gfilenameSave,jdbcType=VARCHAR}, #{guploadtime,jdbcType=TIMESTAMP}, #{guploadusrid,jdbcType=INTEGER}, 
+      #{gfilsize,jdbcType=DECIMAL}, #{ufilformat,jdbcType=VARCHAR}, #{gfilepath,jdbcType=VARCHAR}, 
+      #{gpathSave,jdbcType=VARCHAR}, #{glaccessusrid,jdbcType=INTEGER}, #{glaccesstime,jdbcType=TIMESTAMP}, 
+      #{glmodusrid,jdbcType=INTEGER}, #{glmodtime,jdbcType=TIMESTAMP}, #{gdownloadtimes,jdbcType=DECIMAL}, 
+      #{isrecycle,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webcloud.entity.Fileforgru" >
+    insert into file_forgru
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="gfileid != null" >
+        gfileid,
+      </if>
+      <if test="gfilename != null" >
+        gfilename,
+      </if>
+      <if test="gfilenameSave != null" >
+        gfilename_save,
+      </if>
+      <if test="guploadtime != null" >
+        guploadtime,
+      </if>
+      <if test="guploadusrid != null" >
+        guploadusrid,
+      </if>
+      <if test="gfilsize != null" >
+        gfilsize,
+      </if>
+      <if test="ufilformat != null" >
+        ufilformat,
+      </if>
+      <if test="gfilepath != null" >
+        gfilepath,
+      </if>
+      <if test="gpathSave != null" >
+        gpath_save,
+      </if>
+      <if test="glaccessusrid != null" >
+        glaccessusrid,
+      </if>
+      <if test="glaccesstime != null" >
+        glaccesstime,
+      </if>
+      <if test="glmodusrid != null" >
+        glmodusrid,
+      </if>
+      <if test="glmodtime != null" >
+        glmodtime,
+      </if>
+      <if test="gdownloadtimes != null" >
+        gdownloadtimes,
+      </if>
+      <if test="isrecycle != null" >
+        isrecycle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="gfileid != null" >
+        #{gfileid,jdbcType=INTEGER},
+      </if>
+      <if test="gfilename != null" >
+        #{gfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="gfilenameSave != null" >
+        #{gfilenameSave,jdbcType=VARCHAR},
+      </if>
+      <if test="guploadtime != null" >
+        #{guploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guploadusrid != null" >
+        #{guploadusrid,jdbcType=INTEGER},
+      </if>
+      <if test="gfilsize != null" >
+        #{gfilsize,jdbcType=DECIMAL},
+      </if>
+      <if test="ufilformat != null" >
+        #{ufilformat,jdbcType=VARCHAR},
+      </if>
+      <if test="gfilepath != null" >
+        #{gfilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="gpathSave != null" >
+        #{gpathSave,jdbcType=VARCHAR},
+      </if>
+      <if test="glaccessusrid != null" >
+        #{glaccessusrid,jdbcType=INTEGER},
+      </if>
+      <if test="glaccesstime != null" >
+        #{glaccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="glmodusrid != null" >
+        #{glmodusrid,jdbcType=INTEGER},
+      </if>
+      <if test="glmodtime != null" >
+        #{glmodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gdownloadtimes != null" >
+        #{gdownloadtimes,jdbcType=DECIMAL},
+      </if>
+      <if test="isrecycle != null" >
+        #{isrecycle,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webcloud.entity.Fileforgru" >
+    update file_forgru
+    <set >
+      <if test="gfilename != null" >
+        gfilename = #{gfilename,jdbcType=VARCHAR},
+      </if>
+      <if test="gfilenameSave != null" >
+        gfilename_save = #{gfilenameSave,jdbcType=VARCHAR},
+      </if>
+      <if test="guploadtime != null" >
+        guploadtime = #{guploadtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guploadusrid != null" >
+        guploadusrid = #{guploadusrid,jdbcType=INTEGER},
+      </if>
+      <if test="gfilsize != null" >
+        gfilsize = #{gfilsize,jdbcType=DECIMAL},
+      </if>
+      <if test="ufilformat != null" >
+        ufilformat = #{ufilformat,jdbcType=VARCHAR},
+      </if>
+      <if test="gfilepath != null" >
+        gfilepath = #{gfilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="gpathSave != null" >
+        gpath_save = #{gpathSave,jdbcType=VARCHAR},
+      </if>
+      <if test="glaccessusrid != null" >
+        glaccessusrid = #{glaccessusrid,jdbcType=INTEGER},
+      </if>
+      <if test="glaccesstime != null" >
+        glaccesstime = #{glaccesstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="glmodusrid != null" >
+        glmodusrid = #{glmodusrid,jdbcType=INTEGER},
+      </if>
+      <if test="glmodtime != null" >
+        glmodtime = #{glmodtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gdownloadtimes != null" >
+        gdownloadtimes = #{gdownloadtimes,jdbcType=DECIMAL},
+      </if>
+      <if test="isrecycle != null" >
+        isrecycle = #{isrecycle,jdbcType=BIT},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+      and gfileid = #{gfileid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webcloud.entity.Fileforgru" >
+    update file_forgru
+    set gfilename = #{gfilename,jdbcType=VARCHAR},
+      gfilename_save = #{gfilenameSave,jdbcType=VARCHAR},
+      guploadtime = #{guploadtime,jdbcType=TIMESTAMP},
+      guploadusrid = #{guploadusrid,jdbcType=INTEGER},
+      gfilsize = #{gfilsize,jdbcType=DECIMAL},
+      ufilformat = #{ufilformat,jdbcType=VARCHAR},
+      gfilepath = #{gfilepath,jdbcType=VARCHAR},
+      gpath_save = #{gpathSave,jdbcType=VARCHAR},
+      glaccessusrid = #{glaccessusrid,jdbcType=INTEGER},
+      glaccesstime = #{glaccesstime,jdbcType=TIMESTAMP},
+      glmodusrid = #{glmodusrid,jdbcType=INTEGER},
+      glmodtime = #{glmodtime,jdbcType=TIMESTAMP},
+      gdownloadtimes = #{gdownloadtimes,jdbcType=DECIMAL},
+      isrecycle = #{isrecycle,jdbcType=BIT}
+    where gid = #{gid,jdbcType=INTEGER}
+      and gfileid = #{gfileid,jdbcType=INTEGER}
+  </update>
+</mapper>

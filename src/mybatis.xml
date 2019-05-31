@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 引用jdbc.properties配置文件 -->
+<properties resource="jdbc.properties"/>
+
+	<environments default="dataSource">
+
+        <environment id="dataSource">
+            <transactionManager type="JDBC"/>
+            <dataSource type="UNPOOLED">  <!--UNPOOLED,未使用池   POOLED,使用JNDI 使用JNDI-->
+                <property name="driver" value="${jdbc_driver}"/>  
+                <property name="url" value="${jdbc_url}"/>
+                <property name="username" value="${jdbc_user}"/>  
+                <property name="password" value="${jdbc_password}"/>  
+            </dataSource>  
+        </environment> 
+         
+    </environments>
+    
+    <!-- mapper配置 -->
+	<mappers>
+		<mapper resource="com/webcloud/dao/FileforgruMapper.xml" />
+		<mapper resource="com/webcloud/dao/FileforusrMapper.xml" />
+		<mapper resource="com/webcloud/dao/JoininMapper.xml" />
+		<mapper resource="com/webcloud/dao/UserMapper.xml" />
+		<mapper resource="com/webcloud/dao/ManageMapper.xml" />
+		<mapper resource="com/webcloud/dao/ShareforusrMapper.xml" />
+		<mapper resource="com/webcloud/dao/GroupMapper.xml" />
+	</mappers>
+</configuration>	

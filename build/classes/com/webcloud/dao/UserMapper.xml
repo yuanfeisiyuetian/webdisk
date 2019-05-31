@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webcloud.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.webcloud.entity.User" >
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="uregistertime" property="uregistertime" jdbcType="TIMESTAMP" />
+    <result column="uemail" property="uemail" jdbcType="VARCHAR" />
+    <result column="passwordhash" property="passwordhash" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, uname, uregistertime, uemail, passwordhash
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 这是一个登陆的方法 -->
+  <select id="selectLoginUser" resultMap="BaseResultMap" parameterType="com.webcloud.entity.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uemail = #{uemail} and passwordhash = #{passwordhash}
+  </select>
+  
+  <!-- email不能重复 -->
+   <select id="selectbyEmail" resultMap="BaseResultMap" parameterType="com.webcloud.entity.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uemail = #{uemail}
+  </select>
+  
+  <!-- 根据用户名查找用户 -->
+  <select id="selectByUName" resultMap="BaseResultMap" parameterType="com.webcloud.entity.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where uname like '%${uname}%'
+  </select>
+  
+  <!-- 显示所有用户 -->
+  <select id="select" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where uid = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.webcloud.entity.User" >
+    insert into user (uid, uname, uregistertime, 
+      uemail, passwordhash)
+    values (#{uid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{uregistertime,jdbcType=TIMESTAMP}, 
+      #{uemail,jdbcType=VARCHAR}, #{passwordhash,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webcloud.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="uregistertime != null" >
+        uregistertime,
+      </if>
+      <if test="uemail != null" >
+        uemail,
+      </if>
+      <if test="passwordhash != null" >
+        passwordhash,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="uregistertime != null" >
+        #{uregistertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uemail != null" >
+        #{uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordhash != null" >
+        #{passwordhash,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webcloud.entity.User" >
+    update user
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="uregistertime != null" >
+        uregistertime = #{uregistertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uemail != null" >
+        uemail = #{uemail,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordhash != null" >
+        passwordhash = #{passwordhash,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webcloud.entity.User" >
+    update user
+    set uname = #{uname,jdbcType=VARCHAR},
+      uregistertime = #{uregistertime,jdbcType=TIMESTAMP},
+      uemail = #{uemail,jdbcType=VARCHAR},
+      passwordhash = #{passwordhash,jdbcType=VARCHAR}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

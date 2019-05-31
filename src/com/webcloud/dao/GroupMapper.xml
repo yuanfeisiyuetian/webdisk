@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webcloud.dao.GroupMapper" >
+  <resultMap id="BaseResultMap" type="com.webcloud.entity.Group" >
+    <id column="gid" property="gid" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
+    <result column="setuptime" property="setuptime" jdbcType="TIMESTAMP" />
+    <result column="oid" property="oid" jdbcType="INTEGER" />
+    <result column="managerauth" property="managerauth" jdbcType="DECIMAL" />
+    <result column="uauth" property="uauth" jdbcType="DECIMAL" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    gid, gname, setuptime, oid, managerauth, uauth, token
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from grp
+    where gid = #{gid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByOid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from grp
+    where oid = #{oid,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByToken" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from grp
+    where token = #{token}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from grp
+    where gid = #{gid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.webcloud.entity.Group" >
+    insert into grp (gid, gname, setuptime, 
+      oid, managerauth, uauth, 
+      token)
+    values (#{gid,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}, #{setuptime,jdbcType=TIMESTAMP}, 
+      #{oid,jdbcType=INTEGER}, #{managerauth,jdbcType=DECIMAL}, #{uauth,jdbcType=DECIMAL}, 
+      #{token,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webcloud.entity.Group" >
+    insert into grp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        gid,
+      </if>
+      <if test="gname != null" >
+        gname,
+      </if>
+      <if test="setuptime != null" >
+        setuptime,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="managerauth != null" >
+        managerauth,
+      </if>
+      <if test="uauth != null" >
+        uauth,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gid != null" >
+        #{gid,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="setuptime != null" >
+        #{setuptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="managerauth != null" >
+        #{managerauth,jdbcType=DECIMAL},
+      </if>
+      <if test="uauth != null" >
+        #{uauth,jdbcType=DECIMAL},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webcloud.entity.Group" >
+    update grp
+    <set >
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
+      </if>
+      <if test="setuptime != null" >
+        setuptime = #{setuptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=INTEGER},
+      </if>
+      <if test="managerauth != null" >
+        managerauth = #{managerauth,jdbcType=DECIMAL},
+      </if>
+      <if test="uauth != null" >
+        uauth = #{uauth,jdbcType=DECIMAL},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webcloud.entity.Group" >
+    update grp
+    set gname = #{gname,jdbcType=VARCHAR},
+      setuptime = #{setuptime,jdbcType=TIMESTAMP},
+      oid = #{oid,jdbcType=INTEGER},
+      managerauth = #{managerauth,jdbcType=DECIMAL},
+      uauth = #{uauth,jdbcType=DECIMAL},
+      token = #{token,jdbcType=VARCHAR}
+    where gid = #{gid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.webcloud.dao.ShareforusrMapper" >
+  <resultMap id="BaseResultMap" type="com.webcloud.entity.Shareforusr" >
+    <id column="ushareid" property="ushareid" jdbcType="INTEGER" />
+    <id column="uid" property="uid" jdbcType="INTEGER" />
+    <id column="ufileid" property="ufileid" jdbcType="INTEGER" />
+    <result column="usharedate" property="usharedate" jdbcType="TIMESTAMP" />
+    <result column="ufilepassword" property="ufilepassword" jdbcType="VARCHAR" />
+    <result column="ufilepath" property="ufilepath" jdbcType="VARCHAR" />
+    <result column="ufilename" property="ufilename" jdbcType="VARCHAR" />
+    <result column="usharedateend" property="usharedateend" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ushareid, uid, ufileid, usharedate, ufilepassword, ufilepath, ufilename, usharedateend
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.webcloud.entity.ShareforusrKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_forusr
+    where ushareid = #{ushareid,jdbcType=INTEGER}
+      and uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 显示分享列表 -->
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_forusr
+    where uid = #{uid}
+  </select>
+  
+  <!-- 查看每个文件是否分享过 -->
+  <select id="selectByUfileid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_forusr
+    where ufileid = #{ufileid}
+  </select>
+  
+  
+  <!-- 根据uuid查看 -->
+  <select id="selectByToken" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from share_forusr
+    where ufilepath = #{ufilepath}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="com.webcloud.entity.ShareforusrKey" >
+    delete from share_forusr
+    where ushareid = #{ushareid,jdbcType=INTEGER}
+      and uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.webcloud.entity.Shareforusr" >
+    insert into share_forusr (ushareid, uid, ufileid, 
+      usharedate, ufilepassword, ufilepath, 
+      ufilename, usharedateend)
+    values (#{ushareid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{ufileid,jdbcType=INTEGER}, 
+      #{usharedate,jdbcType=TIMESTAMP}, #{ufilepassword,jdbcType=VARCHAR}, #{ufilepath,jdbcType=VARCHAR}, 
+      #{ufilename,jdbcType=VARCHAR}, #{usharedateend,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.webcloud.entity.Shareforusr" >
+    insert into share_forusr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ushareid != null" >
+        ushareid,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="ufileid != null" >
+        ufileid,
+      </if>
+      <if test="usharedate != null" >
+        usharedate,
+      </if>
+      <if test="ufilepassword != null" >
+        ufilepassword,
+      </if>
+      <if test="ufilepath != null" >
+        ufilepath,
+      </if>
+      <if test="ufilename != null" >
+        ufilename,
+      </if>
+      <if test="usharedateend != null" >
+        usharedateend,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ushareid != null" >
+        #{ushareid,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="ufileid != null" >
+        #{ufileid,jdbcType=INTEGER},
+      </if>
+      <if test="usharedate != null" >
+        #{usharedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ufilepassword != null" >
+        #{ufilepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="ufilepath != null" >
+        #{ufilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="ufilename != null" >
+        #{ufilename,jdbcType=VARCHAR},
+      </if>
+      <if test="usharedateend != null" >
+        #{usharedateend,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.webcloud.entity.Shareforusr" >
+    update share_forusr
+    <set >
+      <if test="usharedate != null" >
+        usharedate = #{usharedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ufilepassword != null" >
+        ufilepassword = #{ufilepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="ufilepath != null" >
+        ufilepath = #{ufilepath,jdbcType=VARCHAR},
+      </if>
+      <if test="ufilename != null" >
+        ufilename = #{ufilename,jdbcType=VARCHAR},
+      </if>
+      <if test="usharedateend != null" >
+        usharedateend = #{usharedateend,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ushareid = #{ushareid,jdbcType=INTEGER}
+      and uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.webcloud.entity.Shareforusr" >
+    update share_forusr
+    set usharedate = #{usharedate,jdbcType=TIMESTAMP},
+      ufilepassword = #{ufilepassword,jdbcType=VARCHAR},
+      ufilepath = #{ufilepath,jdbcType=VARCHAR},
+      ufilename = #{ufilename,jdbcType=VARCHAR},
+      usharedateend = #{usharedateend,jdbcType=TIMESTAMP}
+    where ushareid = #{ushareid,jdbcType=INTEGER}
+      and uid = #{uid,jdbcType=INTEGER}
+      and ufileid = #{ufileid,jdbcType=INTEGER}
+  </update>
+</mapper>
