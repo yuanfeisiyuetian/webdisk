@@ -61,6 +61,13 @@ public class GroupBizImpl implements GroupBiz {
 	}
 
 
+	@Override
+	public int delete(Integer gid) {
+		// TODO Auto-generated method stub
+		return groupMapper.deleteByPrimaryKey(gid);
+	}
+
+
 
 
 }

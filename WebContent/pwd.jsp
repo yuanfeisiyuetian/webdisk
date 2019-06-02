@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="test" style="height:200px">
   <p id="image_logo"><img src="image/login/girl.png" ></p>
     <form action="user/pwd.do"  method="post">
-        <p><label class="label_input" >新密码：</label><input type="text" name="password" class="text_field"></p>
+        <p><label class="label_input" >新密码：</label><input type="password" name="password" class="text_field"></p>
         <br/>
         <div id="login_control">
         <input type ="submit" style="height:35px ;width:60px;font-size: 16px;font-family: 宋体;color: black;background-color: #7EC0EE;border-radius: 6px;border: 0;" value="提交" />

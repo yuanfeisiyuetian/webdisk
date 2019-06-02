@@ -24,9 +24,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 </form>
 <a href="register.jsp">还没有账号？注册一个</a>
-<%if(session.getAttribute("msg")!=null){ %>
+<%if(((String)session.getAttribute("msg")).equals("用户名和密码错误")){ %>
 <script type="text/javascript">
 	alert("用户名或者密码错误！");
+</script>
+<%}else { %>
+<script type="text/javascript">
+	alert("请重新登陆");
 </script>
 <%} %>
 </div>

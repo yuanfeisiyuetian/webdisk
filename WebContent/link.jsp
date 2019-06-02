@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>分享链接</title>
 </head>
 <body>
-	<div id="test" style="text-align:left;height:180px">
+	<div id="test" style="text-align:left;height:200px">
 	<h4><%=shareforusr.getUfilename() %></h4>
   	<p><label class="label_input" >文件id：</label>
 	<%=shareforusr.getUfilepath() %></p>

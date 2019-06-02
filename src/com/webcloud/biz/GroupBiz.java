@@ -14,4 +14,6 @@ public interface GroupBiz {
 	public Group selectByGid(Integer gid);
 	
 	public int update(Group group);
+	
+	public int delete(Integer gid);
 }

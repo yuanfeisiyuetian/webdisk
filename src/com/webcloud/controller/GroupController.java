@@ -260,4 +260,11 @@ public class GroupController {
 		map2.put("users", joinlist);
 		return "forward:/groupuser.jsp";
 	}
+	
+	@RequestMapping(value="del")
+	public String del(HttpSession session){
+		int gid = (int) session.getAttribute("gid");
+		groupBiz.delete(gid);
+		return "redirect:/group/init.do";
+	}
 }

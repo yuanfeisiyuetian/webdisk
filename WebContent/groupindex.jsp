@@ -99,6 +99,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<span class="text" style="width: auto;">管理</span>
 		</span>
 	</a>
+	<a title="解散" class="g-button" href="group/del.do">
+		<span class="g-button-right">
+		<span class="text" style="width: auto;">解散群</span>
+		</span>
+	</a>
 	<%} %>
 	</div>
 	
