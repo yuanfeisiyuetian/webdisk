@@ -88,12 +88,13 @@ public class UserController {
 	
 	@RequestMapping(value="resetpwd")
 	public String resetpwd(HttpServletRequest request,HttpSession session){
+		session.removeAttribute("msg");
 		int uid = Integer.parseInt(request.getParameter("key"));
 		User user = userBiz.selectByUid(uid);
 		user.setPasswordhash(generateWord());
 		userBiz.update(user);
 		session.setAttribute("msg", user.getUemail()+"µÄÃÜÂëÖØÖÃÎª"+user.getPasswordhash());
-		return "forward:/user/admin.do";
+		return "forward:/resetpwd.jsp";
 	}
 	
 	

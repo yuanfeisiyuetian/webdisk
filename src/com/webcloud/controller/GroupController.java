@@ -146,7 +146,12 @@ public class GroupController {
 	@RequestMapping(value="set")
 	public String set(Group group,HttpSession session){
 		int gid = (int) session.getAttribute("gid");
+		Group groupold = (Group)session.getAttribute("group");
 		group.setGid(gid);
+		group.setSetuptime(groupold.getSetuptime());
+		group.setToken(groupold.getToken());
+		group.setOid((int)session.getAttribute("uid"));
+		session.setAttribute("group", group);
 		groupBiz.update(group);
 		return "redirect:/group/manage.do";
 	}
@@ -181,6 +186,7 @@ public class GroupController {
 		joinin.setGid(gid);
 		joinin.setUid(uid);
 		joinin.setOdiauth(groupBiz.selectByGid(gid).getUauth());
+		joinin.setDate(new Date());
 		groupjoinBiz.insertjoinin(joinin);
 		return "redirect:/group/manage.do";
 	}
@@ -206,6 +212,28 @@ public class GroupController {
 		joininkey.setUid(uid);
 		groupjoinBiz.deletejoinin(joininkey);
 		return "redirect:/group/manage.do";
+	}
+	
+	@RequestMapping(value="quitmanage")
+	public String quitmanage(HttpSession session,HttpServletRequest request){
+		int gid = Integer.parseInt(request.getParameter("key"));
+		int uid = (int)session.getAttribute("uid");
+		ManageKey managekey = new ManageKey();
+		managekey.setGid(gid);
+		managekey.setUid(uid);
+		groupmanageBiz.deletemanage(managekey);
+		return "redirect:/group/init.do";
+	}
+	
+	@RequestMapping(value="quitgroup")
+	public String quitgroup(HttpSession session,HttpServletRequest request){
+		int gid = Integer.parseInt(request.getParameter("key"));
+		int uid = (int)session.getAttribute("uid");
+		JoininKey joininkey = new JoininKey();
+		joininkey.setGid(gid);
+		joininkey.setUid(uid);
+		groupjoinBiz.deletejoinin(joininkey);
+		return "redirect:/group/init.do";
 	}
 	
 	@RequestMapping(value="searchuser")

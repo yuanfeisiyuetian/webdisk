@@ -136,6 +136,11 @@ public class FileShareController {
 		 session.removeAttribute("msg");
 		 Shareforusr shareforusr = shareforusrbiz.showshare(ufilepath);
 		 if(shareforusr!=null){
+			 if(shareforusr.getUsharedateend().before(new Date())){	//分享过期
+				 shareforusrbiz.deleteshare(shareforusr);
+				 session.setAttribute("msg", "文件不存在");
+				 return "forward:/share/init.do";
+			 }
 			 if(shareforusr.getUfilepassword()==null){
 				 Fileforusr fileforusr = fileforusrbiz.selectByUfileID(shareforusr.getUfileid());
 				 map.put("fileforusr", fileforusr);

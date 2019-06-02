@@ -1,0 +1,201 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 22, 2019, 2:48:32 PM
+    Author     : molan
+*/
+
+body{
+    background-image: url(background.png);
+}
+
+#title_{
+    position:relative;
+    left: 0px;
+    margin: 0px;
+}
+
+img{
+    position: relative;
+    transition: all 0.6s;
+    cursor:pointer;
+    height: 120px;
+    width: 100px;
+    margin: 50px;
+    margin-bottom: 20px;
+}
+img:hover{
+    transform: scale(1.2);
+}
+
+.search{
+    position: absolute;
+    margin-top: 130px;
+    left: 1200px;
+}
+
+.search input {
+	width:300px;
+	border-radius:35px;
+	border:2px solid #324B4E;
+	background:#F9F0DA;
+	float:right;
+        height: 35px;
+}
+.search button {
+	background:none;
+        height:35px;
+	width:35px;
+        left: 240px;
+	cursor:pointer;
+	position:absolute;
+        border: none;
+}
+
+.user{
+    position: absolute;
+    margin-top: 140px;
+    left: 1550px;
+    font-size: 20px;
+}
+.user:hover{
+ cursor: pointer;   
+}
+
+#main_{
+    background: white;
+    position: relative;
+    margin-top: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+    height: 600px;
+}
+.ll_{
+    background: lightgray;
+    width: 350px;
+    height: 600px;
+}
+.list_{
+    width: 350px;
+    height: 300px;
+    font-size: 30px;
+    font-family: 隶书;
+    font-weight: bold;
+    cursor:pointer;
+    text-align: center;
+}
+.file_mng:hover{
+    background: grey;
+    color: whitesmoke;
+}
+
+#download{
+    background: white;
+    width: 100px;
+    height: 30px;
+    margin: 15px;
+    font-size: 20px;
+    font-family: 隶书;
+    cursor:pointer;
+    text-align: center;
+}
+.control{
+    background: white;
+    width: 100px;
+    height: 30px;
+    margin: 15px;
+    font-size: 20px;
+    font-family: 隶书;
+    cursor:pointer;
+    text-align: center;
+}
+.control:hover{
+    background: cornflowerblue;
+    color: white;
+}
+
+.showlist{
+    width: 1400px;
+    text-align: center;
+    cursor: pointer;
+}
+.showlist tr:hover{
+    background: lightcyan;
+}
+
+#showmenu:hover{
+    background: white;
+}
+
+#menu{
+width: 0; /*设置为0 隐藏自定义菜单*/
+height: 125px;
+overflow: hidden; /*隐藏溢出的元素*/
+box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
+position: absolute; /*自定义菜单相对与body元素进行定位*/
+}
+#userlist{
+width: 0px; /*设置为0 隐藏自定义菜单*/
+height: 125px;
+overflow: hidden; /*隐藏溢出的元素*/
+box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
+position:absolute;
+z-index: 9999;
+float: right;
+top: 170px;
+left: 1620px;
+
+}
+.menu {
+width: 130px;
+height: 25px;
+line-height: 25px;
+padding: 0 10px;
+background: white;
+}
+
+.menu:hover{
+     background: cornflowerblue;
+    color: white;
+    cursor:pointer;
+}
+
+.userlist {
+width: 130px;
+height: 25px;
+line-height: 25px;
+padding: 0 10px;
+background: white;
+}
+.userlist:hover{
+    background: cornflowerblue;
+    color: white;
+    cursor: pointer;
+}
+
+#file_back{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    z-index: 9998;
+    background: lightgray;
+    opacity: 0.8;
+}
+#fileloader,#name{
+    width: 500px;
+    height: 240px;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translateX(-50%) translateY(-50%);
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 1px 1px #888,1px 0 1px #ccc;
+    background: white;
+}

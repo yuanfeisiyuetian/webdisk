@@ -8,14 +8,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">  
     <!-- 设置路径 -->
-    <title></title>
+     <link rel="stylesheet" type="text/css" href="css/a-upload.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <title>查看分享</title>
   </head>
   
   <body>
+  <div id="test">
+  	<div style="height: 35px;"></div>
     <form action="share/credit.do"  method="post">
-        请输入密码：<input type="text" name="pwd"><br/>
-        <input type ="submit" value="提交" />
+    <p><label class="label_input">口令：</label><input type="password" name="pwd"  class="text_field"/></p>
+    <div id="login_control"><input type ="submit" style="height:32px ;width:50px;font-size: 16px;font-family: 宋体;color: white;background-color: #7EC0EE;border-radius: 6px;border: 0;" value="提交" /></div>
     </form>
-    ${msg }
+    </div>
+    <%if(session.getAttribute("msg")!=null){ %>
+	<script type="text/javascript">
+		alert("口令错误！");
+	</script>
+	<%} %>
   </body>
 </html>

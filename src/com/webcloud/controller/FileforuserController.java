@@ -25,6 +25,7 @@ public class FileforuserController {
 	@RequestMapping(value="init")
 	public String init(Map map,HttpSession session){
 		int uid = (Integer)session.getAttribute("uid");
+		session.removeAttribute("msg");
 //		System.out.println(uid);
 		List<Fileforusr> fileforusrlist = fileforusrbiz.selectByUid(uid);
 		try{	//捕捉没有文件报错异常

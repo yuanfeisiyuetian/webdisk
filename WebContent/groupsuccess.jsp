@@ -8,12 +8,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">  
     <!-- 设置路径 -->
+    <link rel="stylesheet" type="text/css" href="css/a-upload.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
     
-<title>Insert title here</title>
-</head>
-<body>
-上传成功
-<a href="groupupload.jsp">继续上传</a>
-<a href="groupfile/init.do">返回</a>
-</body>
+    <title>文件上传</title>
+  </head>
+  
+  <body>
+  	<div id="test">
+  	<h4>成功！</h4>
+   <p><a style="height:35px ;width:60px;font-size: 16px;font-family: 宋体;color: black;background-color: #7EC0EE;border-radius: 6px;border: 0;" href="groupupload.jsp">继续上传</a></p>
+   <p><a style="height:35px ;width:60px;font-size: 16px;font-family: 宋体;color: black;background-color: #7EC0EE;border-radius: 6px;border: 0;" href="groupfile/init.do">返回</a></p>
+    </div>
+  </body>
 </html>

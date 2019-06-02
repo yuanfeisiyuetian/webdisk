@@ -45,6 +45,7 @@ public class FileforgruController {
 		if(request.getParameter("key")!=null){	//从页面点击跳转
 			gid = Integer.parseInt(request.getParameter("key"));
 			session.setAttribute("gid", gid);
+			session.setAttribute("group", groupbiz.selectByGid(gid));
 		}
 		else gid = (Integer)session.getAttribute("gid");	//新建或加入一个群组时的跳转
 		System.out.println(gid);
@@ -91,8 +92,9 @@ public class FileforgruController {
 	
 	//显示回收站
 	@RequestMapping(value="recycle")
-	public String recycle(Map map,HttpSession session) {
+	public String recycle(Map map,HttpSession session,Map groupname) {
 		int gid = (Integer)session.getAttribute("gid");
+		String gname = groupbiz.selectByGid(gid).getGname();
 		System.out.println(gid);
 		List<Fileforgru> fileforgrulist = fileforgrubiz.selectByGidr(gid);
 		try{
@@ -101,6 +103,7 @@ public class FileforgruController {
 			e.printStackTrace();
 		}
 		map.put("fileforgrulist", fileforgrulist);
+		groupname.put("groupname", gname);
 		return "forward:/grouprecycle.jsp";
 	}
 	

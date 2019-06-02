@@ -1,0 +1,18 @@
+.element, .outer-container {
+}
+
+.outer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner-container {
+  position: absolute;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.inner-container::-webkit-scrollbar {
+  display: none;
+}

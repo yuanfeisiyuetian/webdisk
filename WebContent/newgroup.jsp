@@ -8,22 +8,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">  
     <!-- 设置路径 -->
+     <link rel="stylesheet" type="text/css" href="css/a-upload.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
     
-    
-<title>Insert title here</title>
+<title>新建群</title>
 </head>
 <body>
-<h2>新建群组</h2>
+<div id="test" style="text-align:left;height:280px;top: 60%;">
+<center><h4>新建群组</h4></center>
 <form action="group/create.do" method="post">
-群名：<input type="text" name="gname" /><br/>
-管理员默认权限<input type="radio" name="managerauth" value="1" checked="checked" />仅下载
+<p>群名：<input type="text" name="gname" class="text_field"/><br/></p>
+<p><label>管理员默认权限:</label></p>
+<input type="radio" name="managerauth" value="1" checked="checked" />仅下载
 		  <input type="radio" name="managerauth" value="2" />仅上传
           <input type="radio" name="managerauth" value="3"/>既可上传又可下载<br/> 
-用户默认权限：<input type="radio" name="uauth" value="1" checked="checked" />仅下载
+<p><label>用户默认权限:</label></p>
+<input type="radio" name="uauth" value="1" checked="checked" />仅下载
 		  <input type="radio" name="uauth" value="2" />仅上传
           <input type="radio" name="uauth" value="3"/>既可上传又可下载<br/>
-<input type ="submit" value="提交" />
-<input type="reset" value="重置" />
+<center><p><input type ="submit" style="height:35px ;width:60px;font-size: 16px;font-family: 宋体;color: black;background-color: #7EC0EE;border-radius: 6px;border: 0;" value="提交" /></p></center>
 </form>
+</div>
 </body>
 </html>
